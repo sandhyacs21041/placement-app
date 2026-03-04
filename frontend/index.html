@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Placement Predictor</title>
+</head>
+
+<body>
+
+<h2>Placement Readiness Predictor</h2>
+
+Java: <input id="java"><br><br>
+Aptitude: <input id="aptitude"><br><br>
+Communication: <input id="communication"><br><br>
+Projects: <input id="projects"><br><br>
+
+<button onclick="predict()">Predict Placement</button>
+
+<h3 id="result"></h3>
+
+<script>
+
+function predict(){
+
+let java = document.getElementById("java").value;
+let aptitude = document.getElementById("aptitude").value;
+let communication = document.getElementById("communication").value;
+let projects = document.getElementById("projects").value;
+
+fetch(`http://localhost:8080/placement/predict?java=${java}&aptitude=${aptitude}&communication=${communication}&projects=${projects}`)
+.then(res => res.text())
+.then(data => {
+document.getElementById("result").innerText = data;
+});
+
+}
+
+</script>
+
+</body>
+</html>
